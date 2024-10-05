@@ -120,7 +120,6 @@ class Processor:
     def process_view(self, row):
         source_code = row['source_code']
         source_db = row['source_db']
-        source_loading_id = row['source_loading_id']
         business_dt = row['business_dt']
 
         self.logger.info("Starting process for %s.", source_code, exc_info=True)
@@ -159,7 +158,7 @@ class Processor:
         except Exception as e:
             self.logger.critical("Error in the process %s: %s", source_code, str(e), exc_info=True)
             self.journal_writer.write_journal(
-                source_code, source_db, "ERROR", source_loading_id, business_dt, 0, str(e)
+                source_code, source_db, "ERROR", business_dt, 0, str(e)
                 )
 
 
